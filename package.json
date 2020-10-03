@@ -1,0 +1,22 @@
+{
+  "name": "js-constructor",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel ./src/index.html -p 8080 --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeprog/js-constructor.git"
+  },
+  "author": "Alina Zelenskaya <dmitrium02@mail.ru>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeprog/js-constructor/issues"
+  },
+  "homepage": "https://github.com/zeprog/js-constructor#readme",
+  "devDependencies": {
+    "parcel-bundler": "^1.12.4"
+  }
+}
