@@ -117,13 +117,20 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"model.js":[function(require,module,exports) {
+})({"assets/img/city.jpg":[function(require,module,exports) {
+module.exports = "/city.428e3359.jpg";
+},{}],"model.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.model = void 0;
+
+var _city = _interopRequireDefault(require("./assets/img/city.jpg"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
 var model = [{
   type: 'title',
   value: 'Конструктор сайтов'
@@ -135,44 +142,10 @@ var model = [{
   value: ['11111', '222222', '333333']
 }, {
   type: 'image',
-  value: './assets/img/city.jpg'
+  value: _city.default
 }];
 exports.model = model;
-},{}],"template.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.template = void 0;
-
-function title(block) {
-  return "\n        <div class=\"row\">\n            <div class=\"col-sm\">\n                <h1>".concat(block.value, "</h1>\n            </div>\n        </div>\n    ");
-}
-
-function text(block) {
-  return "\n        <div class=\"row\">\n            <div class=\"col-sm\">\n                <p>".concat(block.value, "</p>\n            </div>\n        </div>\n    ");
-}
-
-function columns(block) {
-  var html = block.value.map(function (item) {
-    return "<div class=\"col-sm\">".concat(item, "</div>");
-  }).join('');
-  return "\n        <div class=\"row\">\n            ".concat(html, "\n        </div>\n    ");
-}
-
-function image(block) {
-  return "\n        <div class=\"row\">\n            <img src='".concat(block.value, "'>\n        </div>\n    ");
-}
-
-var template = {
-  title: title,
-  text: text,
-  columns: columns,
-  image: image
-};
-exports.template = template;
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./assets/img/city.jpg":"assets/img/city.jpg"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -244,14 +217,66 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.row = row;
+exports.col = col;
+
+function row(content) {
+  return "<div class=\"row\">".concat(content, "</div>");
+}
+
+function col(content) {
+  return "<div class=\"col-sm\">".concat(content, "</div>");
+}
+},{}],"template.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.template = void 0;
+
+var _utils = require("./utils");
+
+function title(block) {
+  return (0, _utils.row)((0, _utils.col)("<h1>".concat(block.value, "</h1>")));
+}
+
+function text(block) {
+  return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")));
+}
+
+function columns(block) {
+  var html = block.value.map(function (item) {
+    return (0, _utils.col)(item);
+  });
+  return (0, _utils.row)(html.join(''));
+}
+
+function image(block) {
+  return (0, _utils.row)("<img src='".concat(block.value, "'>"));
+}
+
+var template = {
+  title: title,
+  text: text,
+  columns: columns,
+  image: image
+};
+exports.template = template;
+},{"./utils":"utils.js"}],"index.js":[function(require,module,exports) {
 "use strict";
 
 var _model = require("./model");
 
-var _template = require("./template");
-
 require("./main.css");
+
+var _template = require("./template");
 
 var content = document.querySelector('#content');
 
@@ -262,7 +287,7 @@ _model.model.forEach(function (block) {
     content.insertAdjacentHTML('beforeend', html(block));
   }
 });
-},{"./model":"model.js","./template":"template.js","./main.css":"main.css"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"./model":"model.js","./main.css":"main.css","./template":"template.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;

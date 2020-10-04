@@ -1,3 +1,5 @@
+import img from './assets/img/city.jpg'
+
 export const model = [
     { type: 'title', value: 'Конструктор сайтов' },
     { type: 'text', value: 'Пока текста нет, но он будет' },
@@ -6,5 +8,5 @@ export const model = [
             '11111', '222222', '333333'
         ]
     },
-    { type: 'image', value: './assets/img/city.jpg' }
+    { type: 'image', value: img }
 ]

@@ -1,7 +1,7 @@
 import { model } from './model'
-import { title, text, columns, image } from './template'
 import './main.css'
 import { template } from './template'
+
 
 const content = document.querySelector('#content')
 
