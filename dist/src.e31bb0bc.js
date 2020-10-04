@@ -119,7 +119,158 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   return newRequire;
 })({"assets/img/city.jpg":[function(require,module,exports) {
 module.exports = "/city.428e3359.jpg";
-},{}],"model.js":[function(require,module,exports) {
+},{}],"utils.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.row = row;
+exports.col = col;
+exports.css = css;
+
+function row(content) {
+  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  return "<div class=\"row\" style=".concat(styles, ">").concat(content, "</div>");
+}
+
+function col(content) {
+  return "<div class=\"col-sm\">".concat(content, "</div>");
+}
+
+function css() {
+  var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var keys = Object.keys(styles);
+  var array = keys.map(function (key) {
+    return "".concat(key, ":").concat(styles[key]);
+  });
+  return array.join(';');
+}
+},{}],"classes/blocks.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.TextBlock = exports.ColumnsBlock = exports.ImageBlock = exports.TitleBlock = exports.Block = void 0;
+
+var _utils = require("../utils");
+
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _createSuper(Derived) { var hasNativeReflectConstruct = _isNativeReflectConstruct(); return function _createSuperInternal() { var Super = _getPrototypeOf(Derived), result; if (hasNativeReflectConstruct) { var NewTarget = _getPrototypeOf(this).constructor; result = Reflect.construct(Super, arguments, NewTarget); } else { result = Super.apply(this, arguments); } return _possibleConstructorReturn(this, result); }; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var Block = /*#__PURE__*/function () {
+  function Block(type, value, options) {
+    _classCallCheck(this, Block);
+
+    this.type = type;
+    this.value = value;
+    this.options = options;
+  }
+
+  _createClass(Block, [{
+    key: "toHTML",
+    value: function toHTML() {
+      throw new Error('Метод должен быть реализован!');
+    }
+  }]);
+
+  return Block;
+}();
+
+exports.Block = Block;
+
+var TitleBlock = /*#__PURE__*/function (_Block) {
+  _inherits(TitleBlock, _Block);
+
+  var _super = _createSuper(TitleBlock);
+
+  function TitleBlock(value, options) {
+    _classCallCheck(this, TitleBlock);
+
+    return _super.call(this, 'title', value, options);
+  }
+
+  _createClass(TitleBlock, [{
+    key: "toHTML",
+    value: function toHTML() {
+      var styles = block.options.styles;
+      return (0, _utils.row)((0, _utils.col)("<h1>".concat(block.value, "</h1>")), (0, _utils.css)(styles));
+    }
+  }]);
+
+  return TitleBlock;
+}(Block);
+
+exports.TitleBlock = TitleBlock;
+
+var ImageBlock = /*#__PURE__*/function (_Block2) {
+  _inherits(ImageBlock, _Block2);
+
+  var _super2 = _createSuper(ImageBlock);
+
+  function ImageBlock(value, options) {
+    _classCallCheck(this, ImageBlock);
+
+    return _super2.call(this, 'image', value, options);
+  }
+
+  return ImageBlock;
+}(Block);
+
+exports.ImageBlock = ImageBlock;
+
+var ColumnsBlock = /*#__PURE__*/function (_Block3) {
+  _inherits(ColumnsBlock, _Block3);
+
+  var _super3 = _createSuper(ColumnsBlock);
+
+  function ColumnsBlock(value, options) {
+    _classCallCheck(this, ColumnsBlock);
+
+    return _super3.call(this, 'columns', value, options);
+  }
+
+  return ColumnsBlock;
+}(Block);
+
+exports.ColumnsBlock = ColumnsBlock;
+
+var TextBlock = /*#__PURE__*/function (_Block4) {
+  _inherits(TextBlock, _Block4);
+
+  var _super4 = _createSuper(TextBlock);
+
+  function TextBlock(value, options) {
+    _classCallCheck(this, TextBlock);
+
+    return _super4.call(this, 'text', value, options);
+  }
+
+  return TextBlock;
+}(Block);
+
+exports.TextBlock = TextBlock;
+},{"../utils":"utils.js"}],"model.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -129,51 +280,37 @@ exports.model = void 0;
 
 var _city = _interopRequireDefault(require("./assets/img/city.jpg"));
 
+var _blocks = require("./classes/blocks");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var model = [{
-  type: 'title',
-  value: 'Конструктор сайтов',
-  options: {
-    styles: {
-      background: '#aedff3',
-      padding: '1rem',
-      'text-align': 'center'
-    }
+var model = [new _blocks.TitleBlock('Конструктор сайтов', {
+  styles: {
+    background: '#aedff3',
+    padding: '1rem',
+    'text-align': 'center'
   }
-}, {
-  type: 'image',
-  value: _city.default,
-  options: {
-    styles: {
-      display: 'flex',
-      'justify-content': 'center',
-      margin: '10px'
-    }
+}), new _blocks.ImageBlock(_city.default, {
+  styles: {
+    display: 'flex',
+    'justify-content': 'center',
+    margin: '10px'
   }
-}, {
-  type: 'columns',
-  value: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?'],
-  options: {
-    styles: {
-      background: '#27a9e6',
-      padding: '1rem'
-    }
+}), new _blocks.ColumnsBlock(['Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?'], {
+  styles: {
+    background: '#27a9e6',
+    padding: '1rem'
   }
-}, {
-  type: 'text',
-  value: 'Как им пользоваться? Просто введите в поле слева нужную информацию.',
-  options: {
-    styles: {
-      'text-align': 'center',
-      padding: '1rem',
-      'font-weight': 'bold',
-      'font-size': '1rem'
-    }
+}), new _blocks.TextBlock('Как им пользоваться? Просто введите в поле слева нужную информацию.', {
+  styles: {
+    'text-align': 'center',
+    padding: '1rem',
+    'font-weight': 'bold',
+    'font-size': '1rem'
   }
-}];
+})];
 exports.model = model;
-},{"./assets/img/city.jpg":"assets/img/city.jpg"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"./assets/img/city.jpg":"assets/img/city.jpg","./classes/blocks":"classes/blocks.js"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -245,34 +382,7 @@ var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"utils.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.row = row;
-exports.col = col;
-exports.css = css;
-
-function row(content) {
-  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-  return "<div class=\"row\" style=".concat(styles, ">").concat(content, "</div>");
-}
-
-function col(content) {
-  return "<div class=\"col-sm\">".concat(content, "</div>");
-}
-
-function css() {
-  var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-  var keys = Object.keys(styles);
-  var array = keys.map(function (key) {
-    return "".concat(key, ":").concat(styles[key]);
-  });
-  return array.join(';');
-}
-},{}],"template.js":[function(require,module,exports) {
+},{"_css_loader":"../node_modules/parcel-bundler/src/builtins/css-loader.js"}],"template.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -355,7 +465,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52653" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58226" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
