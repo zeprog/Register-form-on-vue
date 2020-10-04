@@ -133,16 +133,44 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var model = [{
   type: 'title',
-  value: 'Конструктор сайтов'
-}, {
-  type: 'text',
-  value: 'Пока текста нет, но он будет'
-}, {
-  type: 'columns',
-  value: ['11111', '222222', '333333']
+  value: 'Конструктор сайтов',
+  options: {
+    styles: {
+      background: '#aedff3',
+      padding: '1rem',
+      'text-align': 'center'
+    }
+  }
 }, {
   type: 'image',
-  value: _city.default
+  value: _city.default,
+  options: {
+    styles: {
+      display: 'flex',
+      'justify-content': 'center',
+      margin: '10px'
+    }
+  }
+}, {
+  type: 'columns',
+  value: ['Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Impedit veniam perspiciatis excepturi dignissimos incidunt necessitatibus?'],
+  options: {
+    styles: {
+      background: '#27a9e6',
+      padding: '1rem'
+    }
+  }
+}, {
+  type: 'text',
+  value: 'Как им пользоваться? Просто введите в поле слева нужную информацию.',
+  options: {
+    styles: {
+      'text-align': 'center',
+      padding: '1rem',
+      'font-weight': 'bold',
+      'font-size': '1rem'
+    }
+  }
 }];
 exports.model = model;
 },{"./assets/img/city.jpg":"assets/img/city.jpg"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
@@ -225,13 +253,24 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.row = row;
 exports.col = col;
+exports.css = css;
 
 function row(content) {
-  return "<div class=\"row\">".concat(content, "</div>");
+  var styles = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  return "<div class=\"row\" style=".concat(styles, ">").concat(content, "</div>");
 }
 
 function col(content) {
   return "<div class=\"col-sm\">".concat(content, "</div>");
+}
+
+function css() {
+  var styles = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+  var keys = Object.keys(styles);
+  var array = keys.map(function (key) {
+    return "".concat(key, ":").concat(styles[key]);
+  });
+  return array.join(';');
 }
 },{}],"template.js":[function(require,module,exports) {
 "use strict";
@@ -244,22 +283,23 @@ exports.template = void 0;
 var _utils = require("./utils");
 
 function title(block) {
-  return (0, _utils.row)((0, _utils.col)("<h1>".concat(block.value, "</h1>")));
+  var styles = block.options.styles;
+  return (0, _utils.row)((0, _utils.col)("<h1>".concat(block.value, "</h1>")), (0, _utils.css)(styles));
 }
 
-function text(block) {
-  return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")));
+function image(block) {
+  return (0, _utils.row)("<img src='".concat(block.value, "'>"), (0, _utils.css)(block.options.styles));
 }
 
 function columns(block) {
   var html = block.value.map(function (item) {
     return (0, _utils.col)(item);
   });
-  return (0, _utils.row)(html.join(''));
+  return (0, _utils.row)(html.join(''), (0, _utils.css)(block.options.styles));
 }
 
-function image(block) {
-  return (0, _utils.row)("<img src='".concat(block.value, "'>"));
+function text(block) {
+  return (0, _utils.row)((0, _utils.col)("<p>".concat(block.value, "</p>")), (0, _utils.css)(block.options.styles));
 }
 
 var template = {
