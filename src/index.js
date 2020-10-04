@@ -1,9 +1,7 @@
 import { model } from './model'
+import { Content } from './classes/content'
 import './main.css'
 
+const content = new Content('#content')
 
-const content = document.querySelector('#content')
-
-model.forEach(block => {
-    content.insertAdjacentHTML('beforeend', html(block))
-})
+content.render(model)
