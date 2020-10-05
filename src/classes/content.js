@@ -4,8 +4,9 @@ export class Content {
     }
 
     render(model) {
+        this.elem.innerHTML = ''
         model.forEach(block => {
-            this.elem.insertAdjacentHTML('beforeend', html(block))
+            this.elem.insertAdjacentHTML('beforeend', block.toHTML())
         })
     }
 }
