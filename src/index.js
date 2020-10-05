@@ -1,7 +1,5 @@
 import { model } from './model'
-import { Content } from './classes/content'
 import './main.css'
+import { App } from './classes/app'
 
-const content = new Content('#content')
-
-content.render(model)
+new App(model).init()
